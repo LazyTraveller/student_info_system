@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="jee.support.dao.StudentDao">
+
+	<!--进行模糊查询-->
+	<select id="findBySubjectLike"
+			parameterType="String"	resultType="jee.support.entity.Ticket">
+	select * from ticket t where t.Subject like concat('%',#{val},'%')
+	</select>
+
+	<!--动态查询-->
+	<select id="findBySubjectAndType" parameterType="jee.support.entity.Ticket"
+			resultType="jee.support.entity.Ticket">
+		select * from ticket where 1=1
+		<if test="subject !=null and subject != '' ">
+			and subject like concat('%', #{subject}, '%')
+		</if>
+		<if test="type != null and type!=''">
+			and type =#{type}
+		</if>
+	</select>
+
+	<!--完成1对1和1对多查询-->
+	<resultMap id="TicketWithUserAndAtt" type="jee.support.entity.Ticket">
+		<!--Ticket对象的主键id和ticket表格的主键字段-->
+		<id property="ticketId" column="ticketId"/>
+		<!--Ticket 和User 为1对1关联-->
+		<!--column设置为要传入select二次查询的参数值-->
+		<association property="user" column="UserId" javaType="jee.support.entity.User"
+					 select="jee.support.dao.AdminDao.getUserById"/>
+		<!--Ticket 和Attachment 为1对多关联-->
+		<!--column设置为要传入select二次查询的参数值-->
+		<collection property="attachments" column="ticketId"
+					ofType="jee.support.entity.Attachment"
+					select="jee.support.dao.AttachmentDao.findByTicketId"/>
+	</resultMap>
+
+</mapper>

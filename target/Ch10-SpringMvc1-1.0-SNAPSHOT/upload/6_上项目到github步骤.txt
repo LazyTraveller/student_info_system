@@ -1,0 +1,18 @@
+1
+   cd documnet-name
+2
+  git init
+3
+  git add .
+4 
+  git commit -m "注释" 
+5
+ 到github创建库
+6
+  git remote add origin https://github.com/LazyTraveller/库名.git
+7
+  git push origin master
+8
+  输入QQ邮箱，密码
+9
+ 完成

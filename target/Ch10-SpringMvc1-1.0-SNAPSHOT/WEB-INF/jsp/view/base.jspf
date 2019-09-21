@@ -1,0 +1,9 @@
+<!--所有jsp包含的公共内容>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/template" %>
+<!-- c标签：定义项目的路径,表示项目部署名 -->
+<c:set var="cx" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="zsc" uri="http://jee.zsc.edu.cn/common/"%>
+

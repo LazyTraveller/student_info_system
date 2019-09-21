@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="jee.support.dao.AttachmentDao">
+
+	<!-- 添加票据 -->
+	<insert id="addAttachment" parameterType="jee.support.entity.Attachment"
+			useGeneratedKeys="true" keyProperty="attachmentId">
+	    insert into attachment (fileName, mimeType, fileUrl, studentId)
+	    value(#{fileName},#{mimeType},#{fileUrl},#{studentId})
+	</insert>
+
+</mapper>

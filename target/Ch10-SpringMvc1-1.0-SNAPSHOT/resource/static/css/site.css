@@ -1,0 +1,64 @@
+/*通用*/
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.page-header{
+    margin: 0px 0px 1px;
+    padding-bottom: 3px;
+
+}
+/*注脚*/
+.footer {
+    height: 20px;
+    color: #7f7f7f;
+    border-top: solid 1px #ccc;
+    position: relative;
+}
+
+.footer p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-require {
+    color: red;
+}
+
+/*顶部导航*/
+header.navbar {
+    margin-bottom: 0;   /*清除下外边距*/
+    border-radius: 0;   /*取消圆角效果*/
+}
+
+/*页面主体*/
+section.container-fluid {
+    padding: 0;     /*清除内边距*/
+}
+
+/*左侧菜单*/
+#sidebar {
+    min-height: 650px;  /*设置最小高度*/
+    padding: 0;         /*清除内边距*/
+}
+
+#search-form {
+    margin: 15px 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid lightgrey;
+}
+
+#search-form div {
+    margin: 0 10px;
+}
+
+/*设置菜单第1项的背景颜色*/
+.menuItemColor{
+    background-color: #0b7285;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace表示命名空间 -->
+<!--这是AdminDao接口的实现类-->
+<mapper namespace="jee.support.dao.AdminDao">
+
+	<!--id对应着AdminDao里面的方法名称-->
+    <!--根据用户编号获取用户信息 -->
+	<!--parameterType参数类型-->
+	<!--resultType返回值得类型-->
+    <select id="getAdminById" parameterType="Long"
+            resultType="jee.support.entity.Admin">
+
+		select * from admin where adminId = #{adminId}
+	</select>
+
+    <!-- 添加管理员信息信息 -->
+    <insert id="addAdmin" parameterType="jee.support.entity.Admin"
+            useGeneratedKeys="true" keyProperty="adminId">
+	    insert into admin(adminname, password, enabled, email)
+	    value(#{adminname},#{password},#{enabled},#{email})
+	</insert>
+
+    <!-- 删除管理员信息 -->
+    <delete id="deleteAdmin" parameterType="Long">
+	    delete from admin where adminId=#{adminId}
+	</delete>
+
+    <!--查找管理员-->
+    <select id="findAllAdmin" resultType="jee.support.entity.Admin">
+	select * from admin
+	</select>
+
+	<!--根据管理员姓名和密码查找-->
+	<select id="findByNameAndPwd" resultType="jee.support.entity.Admin">
+	select * from admin as u where u.adminname=#{adminname} and u.password=#{password}
+	</select>
+
+ <!--用户名重复检测-->
+	<select id="findByAdminname" parameterType="String"
+			 resultType="jee.support.entity.Admin">
+		select * from admin as u where u.adminname=#{adminname}
+	</select>
+</mapper>

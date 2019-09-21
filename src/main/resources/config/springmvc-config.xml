@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!--扫描指定的包-->
+    <context:component-scan base-package="jee.support.controller"/>
+    <!-- 配置springmvc支持注解 -->
+    <mvc:annotation-driven>
+        <!--解决@ResponseBody返回的字符出现乱码问题-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
+
+
+    <!-- 配置静态资源不用经过springmv的解析 -->
+    <!-- **表示该文件夹及其子文件夹所有文件-->
+    <mvc:resources location="/resource/" mapping="/resource/**"/>
+    <mvc:resources location="/" mapping="*.html"/>
+    <mvc:resources location="/" mapping="*.jpg"/>
+    <!-- 配置默认jsp页面的地址 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/view/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--配置文件上传-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
+
+    <!--&lt;!&ndash;注册国际化资源文件&ndash;&gt;-->
+    <!--<bean id="messageSource"-->
+          <!--class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
+        <!--<property name="basename"  value="/WEB-INF/i18n/validation-zh" />-->
+        <!--&lt;!&ndash; i18n不包括文件名扩展名 &ndash;&gt;-->
+    <!--</bean>-->
+
+</beans>

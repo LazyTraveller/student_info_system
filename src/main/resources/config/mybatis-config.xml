@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--调用懒加载的 get/set 方法（确实调用 set 方法时也会触发懒加载操作）
+        调用 clone()、equals()、hashCode()、toString()方法
+        也会触发懒加载操作-->
+        <!--启动懒加载属性，在加载对象时不会加载该对象关联的其他对戏
+        只有在调用如get()方法或者其他方法时才会触发关联对象的加载
+        -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+    <typeAliases>
+        <!--配置自动扫描的实体类路径-->
+        <package name="jee.support.entity" />
+    </typeAliases>
+
+<!--配置pageHelper分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!--设置数据可类型Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+</configuration>

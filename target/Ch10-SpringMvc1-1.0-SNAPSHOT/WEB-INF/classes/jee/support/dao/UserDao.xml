@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="jee.support.dao.AdminDao">
+    <!--根据用户编号获取用户信息 -->
+    <select id="getUserById" parameterType="Long"
+            resultType="jee.support.entity.User">
+		select * from User where UserId = #{userId}
+	</select>
+
+    <!-- 添加用户信息 -->
+    <insert id="addUser" parameterType="jee.support.entity.User"
+            useGeneratedKeys="true" keyProperty="UserId">
+	    insert into User(Username, Password, Email, Enabled)
+	    value(#{username},#{password},#{email}, #{enabled})
+	</insert>
+
+    <!-- 删除用户信息 -->
+    <delete id="deleteUser" parameterType="Long">
+	    delete from User where UserId=#{userId}
+	</delete>
+    <!--查找用户-->
+    <select id="findAllUser" resultType="jee.support.entity.User">
+	select * from User
+	</select>
+
+	<!--根据用户名和密码查找用户-->
+	<select id="findByNameAndPwd" resultType="jee.support.entity.User">
+	select * from User as u where u.Username=#{username} and u.Password=#{password}
+	</select>
+ <!--注册-->
+	<select id="findByUsername" parameterType="String"
+			 resultType="jee.support.entity.User">
+		select * from User as u where u.Username=#{username}
+	</select>
+</mapper>
